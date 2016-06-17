@@ -1,0 +1,15 @@
+main.pdf
+*.aux
+*.log
+*.synctex*
+_minted-*
+*.bak
+*.bbl
+*.bcf
+*.blg
+*.xml
+*.lox
+*-blx.bib
+*.toc
+*.out
+*.ini
