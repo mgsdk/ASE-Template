@@ -1,0 +1,31 @@
+% The style of this template is to include all the packages in this main file. Any additional settings for each package is handled in a seperate file, included right after the package include. This allows for easier optimization.
+
+% Any layout changes should be handled in the "layout.tex" file, while any additional macros should be added in "macros.tex" or "luamacros.tex".
+
+% The main document is handled in "document.tex".
+
+% Any custom packages can be handled in "packages.tex", in order to avoid tampering with the main template files.
+
+% This template requires compilation with LuaLaTeX, in order to enable the custom environments for use cases and accepttests. Since minted is included by default, it is required to invoke the compilation with "-shell-escape".
+\documentclass{scrreprt}
+
+% Since this is compiled with LuaLaTeX, it is unnecessary to use utf8 for fontenc. However, it is prefferable to use T1 fonts instead of OT1.
+\usepackage[T1]{fontenc}
+
+% Support for relative imports. This allows the use of input and includegraphics in subdirectories.
+\usepackage{import}
+
+% Include file for custom packages. In rare cases it may be necessary to alter this file instead, when the load order is important.
+\subimport*{settings/}{packages.tex}
+
+% Define any LaTeX macros.
+\subimport*{settings/}{macros.tex}
+
+% Define any LuaLaTeX macros.
+\subimport*{settings/}{luamacros.tex}
+
+\begin{document}
+
+\input{document.tex}
+
+\end{document}
