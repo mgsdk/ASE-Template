@@ -15,14 +15,27 @@
 % Support for relative imports. This allows the use of input and includegraphics in subdirectories.
 \usepackage{import}
 
+% Support for lua.
+\usepackage{luacode}
+
+\usepackage{scrlayer-scrpage}
+
 % Include file for custom packages. In rare cases it may be necessary to alter this file instead, when the load order is important.
 \subimport*{settings/}{packages.tex}
 
+% Import the lua code.
+\begin{luacode*}
+	dofile("lua/wrapper.lua")
+\end{luacode*}
+
 % Define any LaTeX macros.
-\subimport*{settings/}{macros.tex}
+\subimport*{macros/}{macros.tex}
 
 % Define any LuaLaTeX macros.
-\subimport*{settings/}{luamacros.tex}
+\subimport*{luamacros/}{luamacros.tex}
+
+% Configure the layout.
+\subimport*{settings/}{layout.tex}
 
 \begin{document}
 
