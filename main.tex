@@ -12,21 +12,20 @@
 % Since this is compiled with LuaLaTeX, it is unnecessary to use utf8 for fontenc. However, it is prefferable to use T1 fonts instead of OT1.
 \usepackage[T1]{fontenc}
 
-% Support for relative imports. This allows the use of input and includegraphics in subdirectories.
+% Support for relative imports. This allows the use of "\input" and "\includegraphics" in subdirectories.
 \usepackage{import}
 
 % Support for lua.
 \usepackage{luacode}
 
+% Ability to modify the headers and footers.
 \usepackage{scrlayer-scrpage}
 
 % Include file for custom packages. In rare cases it may be necessary to alter this file instead, when the load order is important.
 \subimport*{settings/}{packages.tex}
 
 % Import the lua code.
-\begin{luacode*}
-	dofile("lua/wrapper.lua")
-\end{luacode*}
+\directlua{dofile("lua/wrapper.lua")}
 
 % Define any LaTeX macros.
 \subimport*{macros/}{macros.tex}
