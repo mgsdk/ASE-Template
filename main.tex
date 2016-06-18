@@ -9,8 +9,17 @@
 % This template requires compilation with LuaLaTeX, in order to enable the custom environments for use cases and accepttests. Since minted is included by default, it is required to invoke the compilation with "-shell-escape".
 \documentclass{scrreprt}
 
-% Since this is compiled with LuaLaTeX, it is unnecessary to use utf8 for fontenc. However, it is prefferable to use T1 fonts instead of OT1.
-\usepackage[T1]{fontenc}
+% ------------------------------------------------------------------------------
+% Loading of packages.
+% ------------------------------------------------------------------------------
+
+% Since this is compiled with LuaLaTeX, it is unnecessary to use utf8 for inputenc, since this is implited by default.
+% Instead of fontenc, where it would be prefferable to get T1 instead og OT1 fonts, fontspec is loaded.
+\usepackage{fontspec}
+
+% Support for other languages.
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=usmax]{english}
 
 % Support for relative imports. This allows the use of "\input" and "\includegraphics" in subdirectories.
 \usepackage{import}
@@ -21,8 +30,90 @@
 % Ability to modify the headers and footers.
 \usepackage{scrlayer-scrpage}
 
+% For inserting graphics.
+\usepackage{graphicx}
+
+% For notes and other TODO related activities.
+\usepackage{fixme}
+
+% Bibliography, load before hyperref.
+\usepackage[backend=biber,style=alphabetic,hyperref]{biblatex}
+
+% For SI units.
+\usepackage{siunitx}
+
+% For inserting code.
+\usepackage{minted}
+
+% For typesettings references from biblatex correctly. Load after minted.
+\usepackage{csquotes}
+
+% Package to extract various lengths.
+\usepackage{printlen}
+
+% Formatting for urls.
+\usepackage{url}
+
+% Better tables.
+\usepackage{booktabs}
+
+% Alternative table implementation.
+\usepackage{tabu}
+
+% Allow for long tables.
+\usepackage{longtable}
+
+% Multirow table cells.
+\usepackage{multirow}
+
+% Better enumeration environment.
+\usepackage{enumitem}
+
+% For draft related code.
+\usepackage{ifdraft}
+
+% For date related code.
+\usepackage{datetime}
+
+% Support for placing a float HERE, in cases where the automatic placement is not good enough.
+\usepackage{float}
+
+% For math. Loads amsmath as well.
+\usepackage{mathtools}
+
+% For inline drawing with tikz.
+\usepackage{pgfplots}
+
+% Better typography. Quite heavy during compilation.
+%\usepackage{microtype}
+
 % Include file for custom packages. In rare cases it may be necessary to alter this file instead, when the load order is important.
 \subimport*{settings/}{packages.tex}
+
+% ------------------------------------------------------------------------------
+% Hyperref and friends. These are loaded last, as there seems to be a lot of
+% interaction which needs to be handled, so most other packages needs to be
+% loaded first.
+% ------------------------------------------------------------------------------
+
+% Dynamic references. Does not play nicely with hyperref (At least according to the README of hyperref), but cleverref seems to fix this.
+\usepackage{varioref}
+
+% Clickable links in the PDF.
+\usepackage[hidelinks,unicode]{hyperref}
+
+% Make the links be to the top of a figure instead of where the caption is.
+\usepackage[figure]{hypcap}
+
+% Be able to print the title of a reference instead of the number.
+\usepackage{nameref}
+
+% To enable "clever" references, and support for referencing a range of entries. Load as late as possible to fix must issues with other packages.
+\usepackage{cleveref}
+
+% ------------------------------------------------------------------------------
+% Loading of macros, layout and settings.
+% ------------------------------------------------------------------------------
 
 % Import the lua code.
 \directlua{dofile("lua/wrapper.lua")}
@@ -35,6 +126,10 @@
 
 % Configure the layout.
 \subimport*{settings/}{layout.tex}
+
+% ------------------------------------------------------------------------------
+% Start of the document proper.
+% ------------------------------------------------------------------------------
 
 \begin{document}
 
